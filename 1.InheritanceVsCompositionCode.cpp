@@ -140,6 +140,14 @@ public:
     }
 };
 
+class XYZ {
+public:
+    virtual void happy() = 0;
+    void sad(){
+        cout<<"Day is not going good!"<<endl;
+    }
+};
+
 void solve2(){
     User2* user = new User2();
     NotificationSystem2* email = new Email2();
@@ -154,6 +162,9 @@ void solve2(){
     user->newStock(); cout<<endl;
     email->enable();
     user->newStock(); cout<<endl;
+    XYZ xyz;
+    xyz.happy();
+    xyz.sad();
 }
 
 int main(){

@@ -261,3 +261,53 @@ The child class already gets its own destructor automatically from C++, so the r
 Therefore, the important distinction is that `NotificationChannel*` tells us the type through which we are accessing the object, while `new Email()` tells us the actual type of the object. A virtual destructor allows C++ to use that actual object type during destruction. This is why, whenever a class is intended to be used as a polymorphic base class, we generally give it a virtual destructor, even though the child classes already have their own destructors automatically.
 
 `= default` is used to tell C++ to use the same default destructor with some additional functionalities like making it virtual, this could be used with constructors as well
+
+
+### What is the difference between using initializer list and initilizing the members of the class inside the constructor
+Context:
+
+We can initialise the data members in C++ using the constructor in two ways:
+1. Directly inside the constructor:
+```cpp
+class User {
+private:
+    NotificationService *ns;
+public:
+    User(NotificationService *notif){
+        ns = notif;
+    }
+};
+```
+2. Using the initializer list:
+``` cpp
+class User {
+private:
+    NotificationService *ns;
+public:
+    // ns(notif) means that initialize the ns member with the parameter (notif) passed inside the constructor
+    User(NotificationService *notif) : ns(notif) {}
+};
+```
+
+So I still have to figure out what the difference betweent the two but consider that initializer list is a better option:
+
+``` cpp
+class Person {
+public:
+    string name;
+    int age;
+
+    Person(string name, int age)
+        : name(name), age(age) {
+    }
+};
+```
+
+### What does public, private and protected mena in inheritance
+public keeps everything same, which means whatever was public (data members or methods) earlier in the parent class stays public, whatever was private in the parent class stays private and same for protected as well
+
+with private, everything of parent class becomes private
+
+with protected, all the public and protected members / methods of the parent class become protected
+
+> Note that this public / private / protected on the inheritance do not affect the members / methods of the child class
